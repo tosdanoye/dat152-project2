@@ -65,14 +65,14 @@ Project: [library-spring-ws-rest-security-oauth](library-spring-ws-rest-security
 For this task, you will require the Keycloak Identity Provider server.
 -	Follow the instruction [here](https://github.com/tosdanoye/dat152-lab/tree/main/keycloak-docker) to start and run the Keycloak IdP server using docker container.
 	- `https://github.com/tosdanoye/dat152-lab/tree/main/keycloak-docker`
--	When you have started the server, you can obtain an access\_token for the admin (user2) and normal users (user1 and user3) by sending a POST request to the keycloak token endpoint:
+-	When you have started the server, you can obtain an access\_token for the admin (user2) and normal users (user1, user3, and user4) by sending a POST request to the keycloak token endpoint:
 	```
 	curl -X POST http://localhost:8080/realms/DAT152/protocol/openid-connect/token --data 'grant_type=password&client_id=dat152oblig2&username=user1&password=user1'
 	``` 
 	Or use Postman to send the post request. 
 
 You will then receive a response with the access_token. 
-- Copy the access\_token and replace the `admin.token.test` , `user.token.test` , `user3.token.test` in the `application.properties` with these new values. When they expire, you need to request for new tokens and replace the old ones.
+- Copy the access\_token and replace the `admin.token.test` , `user.token.test` , `user3.token.test`, `user4.token.test` in the `application.properties` with these new values. When they expire, you need to request for new tokens and replace the old ones.
 - Copy your solutions from Tasks 1 & 2 and secure the endpoints by using @PreAuthorize annotation.
 - All /authors, /books, and /order endpoints can only be accessed by ADMIN user role
 - All /users/{id} endpoints must be accessible only to the correct authenticated user or an admin user. For example, user1 (id=1) can only access /users/1 but not /users/2. An admin role must be able to access all the endpoints. Only admin role can access /users endpoint.

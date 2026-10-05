@@ -115,7 +115,7 @@ class TestOrder {
 	public void getOrderById_HATEOAS_thenOK() {
 
 	    Response response = RestAssured.given()
-	    		.header("Authorization", "Bearer "+ USER_TOKEN)
+	    		.header("Authorization", "Bearer "+ ADMIN_TOKEN)
 	    		.get(API_ROOT+"/orders/2");
 	    
 	    assertTrue(response.jsonPath().get("_links").toString().contains("href"));
