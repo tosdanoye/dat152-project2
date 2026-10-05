@@ -80,7 +80,8 @@ You will then receive a response with the access_token.
 
 
 ### Testing
-JUnit tests are provided, and you can run them in your IDE or from a terminal. 
+JUnit tests are provided, and you can run them in your IDE or from a terminal. If running from the terminal (command prompt), make sure you run the test one at a time. (e.g., ./mvnw test -Dtest=no.hvl.dat152.rest.ws.main.test.TestAuthor) 
+You can use the provided shell script (runtest.sh).
 
 Tips:
 -	Watch out for the specific HttpStatus codes in the Junit tests and ensure that they correspond to what you are returning in the controller methods.
