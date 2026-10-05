@@ -3,6 +3,8 @@ package no.hvl.dat152.rest.ws.main.test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.UUID;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Value;
@@ -54,7 +56,8 @@ class TestAuthor {
 	@DisplayName("JUnit test for @PostMapping(/authors) endpoint")
 	@Test
 	public void createAuthor_thenOK() throws AuthorNotFoundException {
-		Author author = new Author("Test", "Author");
+		String suffix = UUID.randomUUID().toString().substring(0, 8);
+		Author author = new Author("Test" + suffix, "Author" + suffix);
 		Response response = RestAssured.given()
 				.header("Authorization", "Bearer "+ ADMIN_TOKEN)
 				.contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -62,7 +65,7 @@ class TestAuthor {
 				.post(API_ROOT+"/authors");
 	    
 	    assertEquals(HttpStatus.CREATED.value(), response.getStatusCode());
-	    assertEquals("Test", response.jsonPath().get("firstname"));
+	    assertEquals(author.getFirstname(), response.jsonPath().get("firstname"));
 	}
 	
 	@DisplayName("JUnit test for @GetMapping(/authors/{id}/books) endpoint")
@@ -96,7 +99,7 @@ class TestAuthor {
 	
 	@DisplayName("JUnit test for @PutMapping(/authors/{id}) endpoint")
 	@Test
-	public void updateAuthor_USER_ROLE_thenOK() throws AuthorNotFoundException, BookNotFoundException {
+	public void updateAuthor_USER_ROLE_thenForbidden() throws AuthorNotFoundException, BookNotFoundException {
 		
 		String uauthor = updatedAuthor();
 		
@@ -106,10 +109,7 @@ class TestAuthor {
 				.body(uauthor)
 				.put(API_ROOT+"/authors/{id}", 6);
 	    
-		int errorCode = response.getStatusCode()== HttpStatus.FORBIDDEN.value() ? 
-				HttpStatus.FORBIDDEN.value() : HttpStatus.INTERNAL_SERVER_ERROR.value();
-		
-	    assertEquals(errorCode, response.getStatusCode());
+	    assertEquals(HttpStatus.FORBIDDEN.value(), response.getStatusCode());
 	    
 	}
 	

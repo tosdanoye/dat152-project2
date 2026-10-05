@@ -33,6 +33,10 @@ public class AuthorService {
 	}
 	
 	// TODO public saveAuthor(Author author)
+	public Author saveAuthor(Author author) {
+		
+		return null;
+	}
 		
 	
 	// TODO public Author updateAuthor(Author author, int id)
