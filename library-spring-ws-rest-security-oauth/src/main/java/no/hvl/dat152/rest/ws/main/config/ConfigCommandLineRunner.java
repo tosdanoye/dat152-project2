@@ -156,7 +156,7 @@ class ConfigCommandLineRunner implements CommandLineRunner  {
 		User user1 = new User("user1@email.com","User1_Firstname", "User1_Lastname");
 		
 		// add roles
-		Role role1 = roleRepository.findByName("USER");
+		Role role1 = roleRepository.findById(2).get();
 		user1.addRole(role1);
 		System.out.println("Role = "+role1.getName());
 		
@@ -172,7 +172,7 @@ class ConfigCommandLineRunner implements CommandLineRunner  {
 		User user2 = new User("user2@email.com","User2_Firstname", "User2_Lastname");
 		
 		// add roles
-		Role role = roleRepository.findByName("ADMIN");
+		Role role = roleRepository.findById(1).get();
 		user2.addRole(role);
 		
 		// add order
@@ -182,14 +182,14 @@ class ConfigCommandLineRunner implements CommandLineRunner  {
 		
 		//user 3  (roles = USER)
 		User user3 = new User("user3@email.com", "User3_Firstname", "User3_Lastname");
-		// add roles
-		Role role31 = roleRepository.findByName("USER");
 
-		user3.addRole(role31);
+		//user 4  (roles = USER)
+		User user4 = new User("user4@email.com", "User4_Firstname", "User4_Lastname");
 		
 		users.add(user1);
 		users.add(user2);
 		users.add(user3);
+		users.add(user4);
 		
 		return users;
 		
